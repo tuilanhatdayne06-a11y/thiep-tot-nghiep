@@ -1,164 +1,145 @@
-import { motion } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+"use client";
 
-interface AnimatedGradientBackgroundProps {
-   /** 
-    * Initial size of the radial gradient, defining the starting width. 
-    * @default 110
-    */
-   startingGap?: number;
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Image from "next/image";
 
-   /**
-    * Enables or disables the breathing animation effect.
-    * @default false
-    */
-   Breathing?: boolean;
+export default function GraduationInvitationPage() {
+  const [guestName, setGuestName] = useState("");
+  const [submittedName, setSubmittedName] = useState("");
 
-   /**
-    * Array of colors to use in the radial gradient.
-    * Each color corresponds to a stop percentage in `gradientStops`.
-    * @default ["#0A0A0A", "#2979FF", "#FF80AB", "#FF6D00", "#FFD600", "#00E676", "#3D5AFE"]
-    */
-   gradientColors?: string[];
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (guestName.trim()) {
+      setSubmittedName(guestName.trim());
+    }
+  };
 
-   /**
-    * Array of percentage stops corresponding to each color in `gradientColors`.
-    * The values should range between 0 and 100.
-    * @default [35, 50, 60, 70, 80, 90, 100]
-    */
-   gradientStops?: number[];
+  const handleReset = () => {
+    setSubmittedName("");
+    setGuestName("");
+  };
 
-   /**
-    * Speed of the breathing animation. 
-    * Lower values result in slower animation.
-    * @default 0.02
-    */
-   animationSpeed?: number;
+  return (
+    <main className="relative w-full min-h-screen flex items-center justify-start p-6 md:p-16 overflow-hidden bg-slate-900">
+      
+      {/* 1. ẢNH NỀN (Ép hiển thị nguyên bản gốc 100%) */}
+      <Image
+        src="/img/nen_tot_nghiep.jpg" // <-- Bạn nhớ kiểm tra đúng tên ảnh nhé
+        alt="Background"
+        fill
+        className="object-cover object-center z-0"
+        quality={100}
+        priority
+        unoptimized
+      />
 
-   /**
-    * Maximum range for the breathing animation in percentage points.
-    * Determines how much the gradient "breathes" by expanding and contracting.
-    * @default 5
-    */
-   breathingRange?: number;
+      {/* 2. LỚP PHỦ GRADIENT (Tối ở bên trái để nổi chữ và mèo, mờ dần sang phải) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 md:via-black/50 to-transparent z-10 pointer-events-none"></div>
 
-   /**
-    * Additional inline styles for the gradient container.
-    * @default {}
-    */
-   containerStyle?: React.CSSProperties;
+      {/* 3. NỘI DUNG CHÍNH (Đã bỏ hạt cát, tập trung vào Mèo và Chữ) */}
+      <div className="relative z-30 w-full max-w-lg md:ml-10 lg:ml-20">
+        <AnimatePresence mode="wait">
+          {!submittedName ? (
+            <motion.div
+              key="input-step"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="text-left"
+            >
+              {/* BÉ MÈO Ở MÀN HÌNH NHẬP TÊN */}
+              <div className="w-28 h-28 mb-2 relative">
+                <DotLottieReact
+                  src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                  loop
+                  autoplay
+                />
+              </div>
 
-   /**
-    * Additional class names for the gradient container.
-    * @default ""
-    */
-   containerClassName?: string;
+              <p className="text-xs uppercase tracking-widest text-pink-400 font-medium mb-2 drop-shadow-md">
+                Lễ Tốt Nghiệp
+              </p>
 
+              <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4 font-serif">
+                Chào mừng!
+              </h2>
 
-   /**
-    * Additional top offset for the gradient container form the top to have a more flexible control over the gradient.
-    * @default 0
-    */
-   topOffset?: number;
+              <p className="text-sm text-slate-300 drop-shadow mb-8 max-w-sm">
+                Vui lòng nhập tên hoặc danh xưng của bạn để nhận thiệp mời tham dự buổi lễ nhé.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-4 max-w-sm relative">
+                <input
+                  type="text"
+                  placeholder="Ví dụ: Anh Nam, Phương Linh..."
+                  value={guestName}
+                  onChange={(e) => setGuestName(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400 text-white placeholder-white/50 backdrop-blur-md transition-all"
+                />
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-medium rounded-xl transition-all shadow-[0_0_15px_rgba(236,72,153,0.4)] active:scale-95"
+                >
+                  Mở Thiệp Mời ✨
+                </button>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="card-step"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-left flex flex-col items-start"
+            >
+              {/* BÉ MÈO NGAY TRÊN CHỮ GRADUATION */}
+              <div className="w-28 h-28 mb-0 relative">
+                <DotLottieReact
+                  src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
+                  loop
+                  autoplay
+                />
+              </div>
+
+              <p className="text-xs uppercase tracking-widest text-pink-400 font-medium mb-2 drop-shadow-md">
+                You're invited to my
+              </p>
+
+              <h1 className="text-5xl md:text-7xl font-serif text-white drop-shadow-lg mb-1">
+                Graduation
+              </h1>
+              <h1 className="text-4xl md:text-6xl font-serif text-pink-300 drop-shadow-lg mb-10 italic">
+                Ceremony
+              </h1>
+
+              <div className="mb-8 relative">
+                <p className="text-sm text-slate-400 drop-shadow mb-1">Kính gửi:</p>
+                <p className="text-3xl font-serif text-white pb-2 inline-block">
+                  {submittedName}
+                </p>
+                <div className="w-full max-w-[200px] h-[1px] bg-gradient-to-r from-pink-400 to-transparent mt-1"></div>
+              </div>
+
+              <div className="flex flex-col space-y-2 mb-10 text-sm text-slate-300 drop-shadow-md border-l-2 border-pink-500 pl-4">
+                <p>Khoa Công Nghệ Thông Tin — Trường ĐH Công Nghiệp TP.HCM</p>
+                <p className="text-white font-medium">Chủ nhật, 09.08.2026 | 9:30 Sáng</p>
+              </div>
+
+              <button
+                onClick={handleReset}
+                className="text-xs text-white/40 hover:text-white underline transition-colors"
+              >
+                ← Nhập lại tên khác
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </main>
+  );
 }
-
-/**
- * AnimatedGradientBackground
- *
- * This component renders a customizable animated radial gradient background with a subtle breathing effect.
- * It uses `framer-motion` for an entrance animation and raw CSS gradients for the dynamic background.
- *
- *
- * @param {AnimatedGradientBackgroundProps} props - Props for configuring the gradient animation.
- * @returns JSX.Element
- */
-const AnimatedGradientBackground: React.FC<AnimatedGradientBackgroundProps> = ({
-   startingGap = 125,
-   Breathing = false,
-   gradientColors = [
-      "#0A0A0A",
-      "#2979FF",
-      "#FF80AB",
-      "#FF6D00",
-      "#FFD600",
-      "#00E676",
-      "#3D5AFE"
-   ],
-   gradientStops = [35, 50, 60, 70, 80, 90, 100],
-   animationSpeed = 0.02,
-   breathingRange = 5,
-   containerStyle = {},
-   topOffset = 0,
-   containerClassName = "",
-}) => {
-
-
-
-   // Validation: Ensure gradientStops and gradientColors lengths match
-   if (gradientColors.length !== gradientStops.length) {
-      throw new Error(
-         `GradientColors and GradientStops must have the same length.
-     Received gradientColors length: ${gradientColors.length},
-     gradientStops length: ${gradientStops.length}`
-      );
-   }
-
-   const containerRef = useRef<HTMLDivElement | null>(null);
-
-   useEffect(() => {
-      let animationFrame: number;
-      let width = startingGap;
-      let directionWidth = 1;
-
-      const animateGradient = () => {
-         if (width >= startingGap + breathingRange) directionWidth = -1;
-         if (width <= startingGap - breathingRange) directionWidth = 1;
-
-         if (!Breathing) directionWidth = 0;
-         width += directionWidth * animationSpeed;
-
-         const gradientStopsString = gradientStops
-            .map((stop, index) => `${gradientColors[index]} ${stop}%`)
-            .join(", ");
-
-         const gradient = `radial-gradient(${width}% ${width+topOffset}% at 50% 20%, ${gradientStopsString})`;
-
-         if (containerRef.current) {
-            containerRef.current.style.background = gradient;
-         }
-
-         animationFrame = requestAnimationFrame(animateGradient);
-      };
-
-      animationFrame = requestAnimationFrame(animateGradient);
-
-      return () => cancelAnimationFrame(animationFrame); // Cleanup animation
-   }, [startingGap, Breathing, gradientColors, gradientStops, animationSpeed, breathingRange, topOffset]);
-
-   return (
-      <motion.div
-         key="animated-gradient-background"
-         initial={{
-            opacity: 0,
-            scale: 1.5,
-         }}
-         animate={{
-            opacity: 1,
-            scale: 1,
-            transition: {
-               duration: 2,
-               ease: [0.25, 0.1, 0.25, 1], // Cubic bezier easing
-             },
-         }}
-         className={`absolute inset-0 overflow-hidden ${containerClassName}`}
-      >
-         <div
-            ref={containerRef}
-            style={containerStyle}
-            className="absolute inset-0 transition-transform"
-         />
-      </motion.div>
-   );
-};
-
-export default AnimatedGradientBackground;
