@@ -21,7 +21,7 @@ export default function InvitationCard({ submittedName, onReset }: CardProps) {
       {/* ================= KHU VỰC 1: LỜI NGỎ & CHẶNG ĐƯỜNG ================= */}
       <section className="relative w-full min-h-screen flex flex-col items-start justify-center py-16 px-6 md:px-16">
         {/* ĐÃ ĐỔI THÀNH 5.png */}
-        <Image src="/img/5.png" alt="Background 2" fill className="object-cover object-center z-0" quality={100} priority unoptimized />
+        <Image src="/img/5.png" alt="Background 2" fill className="object-cover object-[10%_center] md:object-center z-0" quality={100} priority unoptimized />
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 md:via-black/60 to-transparent z-10 pointer-events-none"></div>
 
         <div className="relative z-30 flex flex-col items-start justify-center w-full max-w-4xl text-left md:ml-10 lg:ml-20">
@@ -36,8 +36,8 @@ export default function InvitationCard({ submittedName, onReset }: CardProps) {
               Khoảnh khắc khoác lên mình bộ lễ phục cử nhân là dấu mốc khép lại hành trình giảng đường và mở ra một chương mới. Mình trân trọng kính mời <span className="font-medium text-[#c8a97e]">{submittedName}</span> đến chung vui trong ngày đặc biệt này, cùng lưu giữ khoảnh khắc đáng nhớ và sẻ chia niềm tự hào của một chặng đường đã qua.
             </p>
             <p className="text-xs text-slate-300 mb-1 font-light">Trân trọng kính mời,</p>
-            <h2 className="text-3xl md:text-4xl font-serif italic text-white drop-shadow-md mt-2">
-              Nguyễn Thị Diễm Phúc
+            <h2 className="text-2xl md:text-4xl font-serif italic text-white drop-shadow-md mt-2">
+              Diễm Phúc
             </h2>
           </motion.div>
 
@@ -77,7 +77,7 @@ export default function InvitationCard({ submittedName, onReset }: CardProps) {
       {/* ================= KHU VỰC 2: THÔNG TIN LỄ & BẢN ĐỒ ================= */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center py-16 px-6 md:px-16">
         {/* ĐÃ ĐỔI THÀNH 6.png */}
-        <Image src="/img/6.png" alt="Background 3" fill className="object-cover object-center z-0" quality={100} unoptimized />
+        <Image src="/img/6.png" alt="Background 3" fill className="object-cover object-[57%_center] md:object-center z-0" quality={100} unoptimized />
         <div className="absolute inset-0 bg-black/85 md:bg-black/80 z-10 pointer-events-none"></div>
 
         <motion.div
@@ -110,7 +110,7 @@ export default function InvitationCard({ submittedName, onReset }: CardProps) {
           </div>
 
           <a 
-            href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+H%E1%BB%8Dc+Quy+Nh%C6%A1n/@13.7589597,109.215277,17z/data=!3m1!4b1!4m6!3m5!1s0x316f6cebf252c49f:0xa83caa291737172f!8m2!3d13.7589597!4d109.2178573!16s%2Fg%2F120ylnmc?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D "
+            href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+H%E1%BB%8Dc+Quy+Nh%C6%A1n/@13.7589597,109.215277,17z/data=!3m1!4b1!4m6!3m5!1s0x316f6cebf252c49f:0xa83caa291737172f!8m2!3d13.7589597!4d109.2178573!16s%2Fg%2F120ylnmc?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D +"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 border border-[#c8a97e] text-[#c8a97e] hover:bg-[#c8a97e] hover:text-black transition-all rounded-sm text-[10px] uppercase tracking-widest font-medium tracking-[0.2em]"
